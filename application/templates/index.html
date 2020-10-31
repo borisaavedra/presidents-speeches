@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <header>
+      <div class="jumbotron jumbotron-fluid mt-4">
+          <div class="container">
+          <h1 class="display-4">👨‍💼 What you said Mr President?</h1>
+          <p class="lead">Tiny speech analyzer to find out what the most powerful politicians said</p>
+          <hr class="my-4">
+          <p class="text-muted">
+            <small>
+              All US presidents speeches were scraped from <a href="https://millercenter.org/the-presidency/presidential-speeches" target="_blank" rel="noopener noreferrer">Miller Center</a><br>
+              <i>Last update: Oct, 25 2020</i>
+            </small>
+          </p>
+          </div>
+      </div>
+    </header>
+    <section class="mb-2">
+        <ul class="nav">
+            <li class="nav-item">
+              Select a country: &nbsp;
+            </li>
+            <li class="nav-item">
+              🇺🇸
+            </li>
+          </ul>
+    </section>
+    <section>
+      <form action="{{ url_for('main.analyze', president='all', q=q) }}" method="GET">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Analyzes a word..." name="q">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Search!</button>
+          </div>
+        </div>
+      </form>
+    </section>
+    <!-- <section>
+      <div class="container">
+        <h2>Presidents</h2>
+        <div class="row row-cols-4 mx-auto">
+          {% for query in queries %}
+                <div class="col">
+                  <div class="card mb-2">
+                    <div class="body-card" for="president-check">
+                       {{ query.name }}
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section> -->
+
+    
+
+{% endblock %}

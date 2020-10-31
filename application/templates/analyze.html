@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="my-2">
+        <ul class="nav">
+            <li class="nav-item">
+            Select a country: &nbsp;
+            </li>
+            <li class="nav-item">
+            🇺🇸
+            </li>
+        </ul>
+    </section>
+    <section>
+        <form action="{{ url_for('main.analyze', president='all', q=q) }}" method="GET">
+            <div class="input-group mb-3">
+            <input type="text" class="form-control" aria-label="Text input with checkbox" placeholder="Analyzes a word..." name="q">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Search!</button>
+            </div>
+            </div>
+        </form>
+    </section>
+    <hr>
+    <div class="card text-white bg-secondary mb-3">
+        <div class="card-body">
+          <h5 class="card-title text-center" style="margin-bottom: 0;"">The Presidents said "{{ word }}" <b>{{ total }}</b> times</h5> 
+        </div>
+      </div>      
+    <div class="card-columns">
+        {% for name, result in all_results|groupby("name") %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ name }}</h5>
+                        {% for p_name in total_by_presi %}
+                            {% if p_name.name == name %}
+                                <p class="card-text">Said it <b>{{ p_name.total}}</b> times total</p>
+                            {% endif %}
+                        {% endfor %}
+                        <ul>
+                            {% for item in result %}
+                                    <li>On <a href="{{ item.url }}" target="_blank"> {{ item.date }}</a> said it {{ item.count }} times.</li>
+                            {% endfor %}
+                        </ul>
+                </div>
+            </div> 
+        {% endfor %}
+    </div>
+{% endblock %}

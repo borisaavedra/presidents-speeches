@@ -1,0 +1,6 @@
+.wrapper {
+    min-height: calc(100vh - 91px)
+}
+.footer {
+    height: 100px;
+}
